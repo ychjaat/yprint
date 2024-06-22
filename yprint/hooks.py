@@ -14,6 +14,17 @@ app_license = "MIT"
 # app_include_css = "/assets/yprint/css/yprint.css"
 # app_include_js = "/assets/yprint/js/yprint.js"
 
+app_include_css = [
+    	"/assets/yprint/css/jodit.min.css"
+]
+
+
+app_include_js = [    
+    "/assets/yprint/js/yprint.js",
+    "/assets/yprint/js/print_format.js",
+    "/assets/yprint/js/jodit.min.js"   
+]
+
 # include js, css files in header of web template
 # web_include_css = "/assets/yprint/css/yprint.css"
 # web_include_js = "/assets/yprint/js/yprint.js"
@@ -66,11 +77,21 @@ app_license = "MIT"
 # before_install = "yprint.install.before_install"
 # after_install = "yprint.install.after_install"
 
+after_install = "yprint.api.hooks.create_custom_fields"
+after_migrate = "yprint.api.hooks.create_custom_fields"
+
+
 # Uninstallation
 # ------------
 
 # before_uninstall = "yprint.uninstall.before_uninstall"
 # after_uninstall = "yprint.uninstall.after_uninstall"
+
+before_uninstall = "yprint.api.hooks.remove_custom_fields"
+
+
+
+
 
 # Integration Setup
 # ------------------
@@ -125,6 +146,15 @@ app_license = "MIT"
 #		"on_trash": "method"
 #	}
 # }
+
+
+doc_events = {
+	"Print Format": {			
+		"before_save": "yprint.api.on_print_update.before_save",		
+	}
+}
+
+
 
 # Scheduled Tasks
 # ---------------
